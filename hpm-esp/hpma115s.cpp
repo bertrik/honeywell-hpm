@@ -1,12 +1,24 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "hpma115s.h"
 
 #ifdef DEBUG
-#include <stdio.h>
-#define DBG printf
+
+// Arduino debugging
+#ifdef ARDUINO
+#include <Arduino.h>
+#define DBG Serial.printf
 #else
-#define DBG(x)
+// non-Arduino debugging
+#define DBG printf
+#endif
+
+#else
+
+// no debugging
+#define DBG(...)
+
 #endif
 
 HPMA115S::HPMA115S(void)
